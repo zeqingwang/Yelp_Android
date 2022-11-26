@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <View android:id="@+id/yelptitleblock"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="#f00404"
+        android:visibility="visible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:gravity="center"
+        android:text="Yelp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+
+        />
+    <Button
+        android:id="@+id/buttontoreserve"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/reservation"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="Business Search"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/keywordinput"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="130dp"
+
+        />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/distanceinput"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="175dp"
+        android:hint="Distance"
+
+
+        />
+    <TextView
+        android:id="@+id/categorytitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="230dp"
+        android:textSize="15dp"
+
+
+
+        />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/categoryspinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="260dp"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/locationinput"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="280dp"
+        />
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="20dp"
+        android:buttonTint="@color/pink"/>
+    <TextView
+        android:id="@+id/checktext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="345dp"
+        android:textSize="15dp"
+        android:text="Auto-detect my location"
+        />
+    <Button
+        android:id="@+id/submitbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="410dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/cornerbutton"
+        android:textColor="@color/white"
+        android:text="SUBMIT"
+        />
+
+    <Button
+        android:id="@+id/clearbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="410dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="250dp"
+        android:background="@drawable/cornerbutton"
+        android:textColor="@color/white"
+        android:text="CLEAR"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="460dp"
+        android:gravity="center"
+        android:text="Reseults"
+        android:textColor="@color/black"
+        android:textSize="30dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/search_line"
+
+
+        />
+
+</RelativeLayout>

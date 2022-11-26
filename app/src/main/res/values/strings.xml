@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Lab9</string>
+    <string-array name="categoryarray">
+        <item>Default</item>
+        <item>Art and Entertainment</item>
+        <item>Health and Medical</item>
+        <item>Hotels and Travel</item>
+        <item>Food</item>
+        <item>Professional Service</item>
+    </string-array>
+</resources>
