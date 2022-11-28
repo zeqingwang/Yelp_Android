@@ -4,15 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.NoActionBar"
     tools:context=".DetailActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:minHeight="?attr/actionBarSize">
 
-    <TextView
-        android:id="@+id/buinessId"
-        android:layout_width="257dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="200dp"
-        android:text="id"
-        android:textColor="@color/black"
-        android:textSize="50dp"/>
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:background="@color/red"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/detailreturn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_arrow_back_24"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/detailname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:text="Detail Name"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginLeft="40dp"
+
+                />
+
+            <Button
+                android:id="@+id/facebook"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="30dp"
+                android:layout_toStartOf="@+id/twitter"
+                android:background="@drawable/facebook"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/twitter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/twitter"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/detailtab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business Detail" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map Location" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviews" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <com.example.lab9.CustomViewPager
+        android:id="@+id/detailviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailtab"
+        android:layout_marginTop="0dp" />
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/buinessId"-->
+<!--        android:layout_width="257dp"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_marginTop="200dp"-->
+<!--        android:text="id"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="50dp"/>-->
 
 </RelativeLayout>
