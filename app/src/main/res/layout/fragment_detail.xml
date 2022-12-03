@@ -7,36 +7,132 @@
     tools:context=".DetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Detail"
-        android:textSize="50dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Address"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:text="Price Range"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/businessaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:text="Business Address"
+        android:textSize="12dp"
+        />
+    <TextView
+        android:id="@+id/businessprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="30dp"
+        android:text="Buiness Price"
+        android:textSize="15dp"
+        />
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/imagetab"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="400dp">-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:text="Phone Number"
+        android:textSize="20dp"
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="50dp"-->
-<!--            android:text="image1" />-->
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="100dp"
+        android:text="Status"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/businessnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="130dp"
+        android:text="Business Number"
+        android:textSize="15dp"
+        />
+    <TextView
+        android:id="@+id/businessstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="130dp"
+        android:text="Status"
+        android:textSize="15dp"
+        />
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="50dp"-->
-<!--            android:text="image2" />-->
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="50dp"-->
-<!--            android:text="image3" />-->
-<!--    </com.google.android.material.tabs.TabLayout>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="200dp"
+        android:text="Category"
+        android:textSize="20dp"
+
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="200dp"
+        android:text="Visit Yelp for More"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/businesscategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="230dp"
+        android:text="Business Category"
+        android:textSize="15dp"
+        />
+    <TextView
+        android:id="@+id/businesslink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="275dp"
+        android:layout_marginTop="230dp"
+        android:text="Buiness Link"
+        android:textSize="15dp"
+        />
+
+
+    <Button
+        android:id="@+id/reservenow"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageviewpager"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="136dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/cornerbutton"
+        android:gravity="center"
+        android:text="Reserve Now"
+        android:textColor="@color/white" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/imageviewpager"

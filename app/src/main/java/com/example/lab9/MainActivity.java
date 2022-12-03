@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
     TextInputEditText keywordinput,locationinput,distanceinput;
     TextView categorytitle;
     AppCompatSpinner categoryspinner;
-    RequestQueue iprequestqueue;
+    RequestQueue iprequestqueue,searchrequestqueue;
     String longitude,latitude;
 
     RecyclerView recyclerView;
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
     }
     private Boolean search(String request_url){
         Log.i("abc","ipaddress");
-        iprequestqueue = Volley.newRequestQueue(getApplicationContext());
+        searchrequestqueue = Volley.newRequestQueue(getApplicationContext());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, request_url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -232,11 +232,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
 
 
 
-//                    String iplocation=response.get("loc").toString();
-//                    latitude=iplocation.substring(0,iplocation.indexOf(','));
-//                    longitude=iplocation.substring(iplocation.indexOf(',')+1,iplocation.length());
-//                    Log.i("lon",longitude);
-//                    Log.i("lat",latitude);
+
 
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -249,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
 
             }
         });
-        iprequestqueue.add(jsonObjectRequest);
+        searchrequestqueue.add(jsonObjectRequest);
 
 
 

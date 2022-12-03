@@ -6,11 +6,18 @@
     tools:context=".Image3Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="image3"
+    <ImageView
+        android:id="@+id/img3"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="0dp"
         android:gravity="center"
-        android:textSize="50dp" />
+        android:src="@drawable/splash_screen"
+        android:scaleType="fitXY"/>
 
 </FrameLayout>

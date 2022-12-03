@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
+//import com.google.android.gms.maps.MapFragment;
 
 import java.util.ArrayList;
 
-public class DetailAdapter extends FragmentPagerAdapter {
+public class DetailAdapter extends FragmentStatePagerAdapter {
     private final ArrayList<Fragment> detailfragmentlist=new ArrayList<>();
     private final ArrayList<String> detailtitlelist=new ArrayList<>();
 
@@ -27,7 +29,7 @@ public class DetailAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return detailfragmentlist.size();
     }
-    public void addFragment(Fragment fragment,String title){
+    public void addFragment(Fragment fragment, String title){
         detailfragmentlist.add(fragment);
         detailtitlelist.add(title);
     }

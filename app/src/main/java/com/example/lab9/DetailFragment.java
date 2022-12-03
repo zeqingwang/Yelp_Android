@@ -1,6 +1,10 @@
 package com.example.lab9;
 
+import static android.content.Intent.getIntent;
+import static com.example.lab9.MainActivity.EXTRA_ID;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -33,12 +37,16 @@ public class DetailFragment extends Fragment {
         List<Fragment> list=new ArrayList<>();
         list.add(new Image1Fragment());
         list.add(new Image2Fragment());
-        list.add(new Image3Fragment());
+//        list.add(new Image3Fragment());
 
         binding=FragmentDetailBinding.inflate(getLayoutInflater());
-
         imagePagerAdapter=new ImagePagerAdapter(getChildFragmentManager(),list);
         binding.imageviewpager.setAdapter(imagePagerAdapter);
+//        Intent intent=getIntent();
+//        String[] img=new String[3];
+//        img=intent.getStringArrayExtra("img");
+
+
         return binding.getRoot();
 
         //return inflater.inflate(R.layout.fragment_detail, container, false);
