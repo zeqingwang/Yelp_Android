@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity {
         detailtab.setupWithViewPager(detailviewpager);
         DetailAdapter detailAdapter=new DetailAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         detailAdapter.addFragment(new DetailFragment(id),"BUSINESS DETAILS");
-        detailAdapter.addFragment(new MymapFragment(),"MAP LOCATION");
+        detailAdapter.addFragment(new MymapFragment(id),"MAP LOCATION");
         detailAdapter.addFragment(new ReviewFragment(id),"REVIEWS");
         detailviewpager.setAdapter(detailAdapter);
         String detail_url="https://wzqlab8backend.wl.r.appspot.com/detail?";

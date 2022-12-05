@@ -62,21 +62,6 @@ public class DetailFragment extends Fragment {
         String detail_url="https://wzqlab8backend.wl.r.appspot.com/detail?";
         detail_url+="id="+id;
         detail(detail_url);
-//        list.add(new Image1Fragment(img1url));
-//        list.add(new Image2Fragment(img2url));
-//        list.add(new Image3Fragment(img3url));
-
-//        list.add(new Image1Fragment());
-//        list.add(new Image2Fragment());
-//        list.add(new Image3Fragment());
-
-
-
-
-//        Intent intent=getIntent();
-//        String[] img=new String[3];
-//        img=intent.getStringArrayExtra("img");
-
 
 
 
@@ -154,75 +139,9 @@ public class DetailFragment extends Fragment {
                     imagePagerAdapter=new ImagePagerAdapter(getChildFragmentManager(),list);
                     binding.imageviewpager.setAdapter(imagePagerAdapter);
 
-//                    binding1= FragmentImage1Binding.inflate(getLayoutInflater());
-//                    binding2= FragmentImage2Binding.inflate(getLayoutInflater());
-//                    binding3= FragmentImage3Binding.inflate(getLayoutInflater());
-//                    img1=binding1.img1;
-//                    Picasso.get().load(img1url).into(img1);
-//                    img2=binding2.img2;
-//                    Picasso.get().load(img2url).into(img2);
-//                    img3=binding3.img3;
-//                    Picasso.get().load(img3url).into(img3);
-//                    img1=findViewById(R.id.img1);
-//                    Picasso.get().load(img1url).into(img1);
-//                    img2=findViewById(R.id.img2);
-//                    Picasso.get().load(img2url).into(img2);
-//                    img3=findViewById(R.id.img3);
-//                    Log.i("img3",img3.toString());
-//                    Picasso.get().load(img3url).into(img3);
-//                    img=new String[3];
-//                    img[0]=img1url;
-//                    img[1]=img2url;
-//                    img[2]=img3url;
-//                    Intent imgIntent = new Intent(DetailActivity.this, DetailFragment.class);
-//
-//                    imgIntent.putExtra("img", img);
-//                    startActivity(imgIntent);
                     latitude=response.getJSONObject("coordinates").getDouble("latitude");
                     longitude=response.getJSONObject("coordinates").getDouble("longitude");
-//                    latLng=new LatLng(response.getJSONObject("coordinates").getDouble("latitude"),response.getJSONObject("coordinates").getDouble("longitude"))
-//                    MarkerOptions markerOptions=new MarkerOptions();
-//                    markerOptions.position(latLng);
-//                    googleMap=findViewById(R.id.map);
-//                    googleMap.clear();
-//                    // Animating to zoom the marker
-//                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
-//                    // Add marker on map
-//                    googleMap.addMarker(markerOptions);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                        businessline.setIndex(String.valueOf(i+1));
-//                        businessline.setImageurl(business.getJSONObject(i).getString("image_url"));
-//                        businessline.setDistance(String.valueOf((int)(business.getJSONObject(i).getDouble("distance")/1609)));
-//                        businessline.setName(business.getJSONObject(i).getString("name"));
-//                        businessline.setRate(String.valueOf(business.getJSONObject(i).getDouble("rating")));
-//                        businessline.setId(business.getJSONObject(i).getString("id"));
-//                        businessList.add(businessline);
-
-
-
-
-
-
-
-
-//                    String iplocation=response.get("loc").toString();
-//                    latitude=iplocation.substring(0,iplocation.indexOf(','));
-//                    longitude=iplocation.substring(iplocation.indexOf(',')+1,iplocation.length());
-//                    Log.i("lon",longitude);
-//                    Log.i("lat",latitude);
 
                 }catch (JSONException e){
                     e.printStackTrace();
