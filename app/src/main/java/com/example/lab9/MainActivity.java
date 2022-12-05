@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -44,12 +47,17 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
     TextInputEditText keywordinput,locationinput,distanceinput;
     TextView categorytitle;
     AppCompatSpinner categoryspinner;
-    RequestQueue iprequestqueue,searchrequestqueue;
+    RequestQueue iprequestqueue,searchrequestqueue,autorequestqueue;
     String longitude,latitude;
 
     RecyclerView recyclerView;
     List<Buiness> businessList;
     SearchAdapter adapter;
+
+
+    AutoCompleteTextView autoText;
+    ArrayList<String> list;
+    ArrayAdapter<String> arrayAdapter;
 
 
 
@@ -73,13 +81,38 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
         });
         String ipurl="https://ipinfo.io/?token=0466c2dd1050ca";
         ipaddress(ipurl);
-//        set the span of keyword
-        keywordinput=(TextInputEditText)findViewById(R.id.keywordinput);
+
+//        set  keywordinput
+        autoText=findViewById(R.id.autokeywordinput);
+        autoText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String str=charSequence.toString();
+                String auto_url="https://wzqlab8backend.wl.r.appspot.com/autocomplete?";
+                auto_url += "keyword=" + str;
+                Log.i("auto_url",auto_url);
+                auto(auto_url);
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
         SpannableString keywordstr = new SpannableString("KewWord *");
         keywordstr.setSpan(new ForegroundColorSpan(Color.RED), 8,     keywordstr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        keywordinput.setHint(keywordstr);
+        autoText.setHint(keywordstr);
 
-
+//      set the distanceinput
         distanceinput=(TextInputEditText)findViewById(R.id.distanceinput);
 
 //        set the span of categorytitle
@@ -121,9 +154,9 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
 
 
                 Boolean inputlegal=true;
-                String keyword=keywordinput.getEditableText().toString();
+                String keyword=autoText.getEditableText().toString();
                 if (keyword.isEmpty()){
-                    keywordinput.setError("This field is required");
+                    autoText.setError("This field is required");
                     inputlegal=false;
                 }
                 String distance=distanceinput.getEditableText().toString();
@@ -260,4 +293,61 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
         startActivity(detailIntent);
 
     }
+    private boolean auto(String url){
+        autorequestqueue = Volley.newRequestQueue(getApplicationContext());
+        Log.i("auto","0000");
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try{
+                    Log.i("auto","11111");
+                    list=new ArrayList<String>();
+                    for(int i=0;i<response.getJSONArray("categories").length();i++){
+                        list.add(response.getJSONArray("categories").getJSONObject(i).getString("title"));
+
+
+                    }
+                    for(int i=0;i<response.getJSONArray("terms").length();i++){
+                        list.add(response.getJSONArray("terms").getJSONObject(i).getString("text"));
+
+                    }
+//                    String [] array=list.toArray();
+                    String[] array = new String[list.size()];
+                    for(int i = 0; i < list.size(); i++) {
+                        array[i] = list.get(i);
+                    }
+                    arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,array);
+
+                    autoText.setAdapter(arrayAdapter);
+
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//                    adapter=new SearchAdapter(getApplicationContext(),businessList);
+//                    recyclerView.setAdapter(adapter);
+//                    adapter.setOnItemClickListener(MainActivity.this);
+
+
+
+
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        autorequestqueue.add(jsonObjectRequest);
+
+
+
+        return true;
+
+    }
+
 }

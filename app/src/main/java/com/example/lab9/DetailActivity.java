@@ -71,8 +71,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-//    private TabLayout imagetab;
-//    private ViewPager imageviewpager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,18 +104,6 @@ public class DetailActivity extends AppCompatActivity {
         String detail_url="https://wzqlab8backend.wl.r.appspot.com/detail?";
         detail_url+="id="+id;
         name(detail_url);
-
-
-
-
-//        review(review_url);
-
-
-
-
-
-
-
 
 
     }
