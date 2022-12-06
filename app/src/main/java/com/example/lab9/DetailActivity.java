@@ -67,6 +67,7 @@ public class DetailActivity extends AppCompatActivity {
     FragmentImage3Binding binding3;
     LatLng latLng;
     GoogleMap googleMap;
+    String id;
 
 
 
@@ -81,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         Intent intent=getIntent();
-        String id=intent.getStringExtra(EXTRA_ID);
+        id=intent.getStringExtra(EXTRA_ID);
 //        TextView businessId=findViewById(R.id.buinessId);
 //        businessId.setText("id:"+id);
         Button detailreturn=findViewById(R.id.detailreturn);
@@ -119,6 +120,10 @@ public class DetailActivity extends AppCompatActivity {
 //                    Log.i("result",business.getJSONObject(0).toString());
                     JSONObject detail=response;
                     name=response.getString("name");
+//                    Intent reserveIntent = new Intent(DetailActivity.this, Dialog.class);
+//                    String[] str={id,name};
+//                    reserveIntent.putExtra("reserve",str);
+//                    startActivity(reserveIntent);
                     TextView detailname=findViewById(R.id.detailname);
 
                     detailname.setText(name);
