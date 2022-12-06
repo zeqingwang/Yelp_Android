@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class DetailFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
@@ -96,7 +99,41 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Boolean legal=true;
+                        String submitemail=reserveemail.getText().toString();
+                        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+                        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+                        Matcher matcher = pattern.matcher(submitemail);
+                        if (matcher.matches()==false){
+                            Toast.makeText(getContext(),"InValid Email Format",Toast.LENGTH_SHORT).show();
+                            legal=false;
+                        }
+                        String submitedate=reservedate.getText().toString();
+                        if((submitedate=="")||(submitedate==" ")||(submitedate==null)){
+                            Toast.makeText(getContext(),"Date can't be empty",Toast.LENGTH_SHORT).show();
+                            legal=false;
+                        }
+                        String submitetime=reservetime.getText().toString();
+                        if((submitetime=="")||(submitetime==" ")||(submitetime==null)){
+                            Toast.makeText(getContext(),"Time should be between 10AM AND 5PM",Toast.LENGTH_SHORT).show();
+                            legal=false;
 
+                        }else{
+                            String[] timearray = submitetime.split(":");
+                            if(timearray[0]!=""){
+                                int submithour=Integer.valueOf(timearray[0]);
+                                if((submithour<=10)||(submithour>=17)){
+                                    Toast.makeText(getContext(),"Time should be between 10AM AND 5PM",Toast.LENGTH_SHORT).show();
+                                    legal=false;
+                                }
+                            }
+
+                        }
+
+                        if (legal==true){
+                            Toast.makeText(getContext(),"Reservation Booked",Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -129,11 +166,7 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-//        Calendar mycalendar= Calendar.getInstance();
-//        mycalendar.set(Calendar.YEAR,year);
-//        mycalendar.set(Calendar.MONTH,month);
-//        mycalendar.set(Calendar.DAY_OF_MONTH,day);
-//        String datestring= DateFormat.getDateInstance().format(mycalendar.getTime());
+
         String datestring=month+"-"+day+"-"+year;
         reservedate.setText(datestring);
     }
