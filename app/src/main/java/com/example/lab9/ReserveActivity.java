@@ -1,25 +1,35 @@
 package com.example.lab9;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 public class ReserveActivity extends AppCompatActivity {
     RecyclerView reserveView;
     List<Reserve> reserveList;
     ReserveAdapter reserveAdapter;
+    private RelativeLayout reservelayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +46,11 @@ public class ReserveActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        reservelayout=findViewById(R.id.reservelayout);
         SharedPreferences sharedPreferences= getSharedPreferences("Reserve",0);
         Map<String, ?> allEntries = sharedPreferences.getAll();
         int length=allEntries.size();
-        Toast.makeText(this,String.valueOf(length),Toast.LENGTH_SHORT).show();
-//        SharedPreferences.Editor editor=sharedPreferences.edit();
-//        String value=name+","+submitedate+","+submitetime+","+submiteemail;
-//        String key=name;
-//        editor.putString(key,value);
-//        editor.apply();
+
         reserveView=findViewById(R.id.reserverecycler);
         reserveList=new ArrayList<>();
         int linecount=1;
@@ -65,8 +71,41 @@ public class ReserveActivity extends AppCompatActivity {
         reserveView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         reserveAdapter=new ReserveAdapter(getApplicationContext(),reserveList);
         reserveView.setAdapter(reserveAdapter);
+        enableSwipeToDeleteAndUndo();
+
 //        reserveAdapter.setOnItemClickListener(getActivity());
 
 
+    }
+    private void enableSwipeToDeleteAndUndo() {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                Reserve clickedItemReserve = reserveList.get(position);
+                reserveList.remove(position);
+                String removedKey=clickedItemReserve.getName();
+                SharedPreferences sharedPreferences=getSharedPreferences("Reserve",0);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                reserveView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                reserveAdapter=new ReserveAdapter(getApplicationContext(),reserveList);
+                reserveView.setAdapter(reserveAdapter);
+                editor.remove(removedKey).commit();
+                Snackbar snackbar = Snackbar.make(reservelayout, "Removing Exiting Reservation.", Snackbar.LENGTH_LONG);
+                Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
+                View snackView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.snackbar_layout, null);
+                snackbar.getView().setPadding(0,0,0,15);
+                TextView textViewTop = (TextView) snackView.findViewById(R.id.snackbar_text);
+                textViewTop.setText("Removing Exiting Reservation.");
+                layout.addView(snackView, 0);
+                snackbar.show();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(reserveView);
     }
 }
