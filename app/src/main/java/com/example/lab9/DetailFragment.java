@@ -2,6 +2,7 @@ package com.example.lab9;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,10 +101,10 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
                     @Override
                     public void onClick(View view) {
                         Boolean legal=true;
-                        String submitemail=reserveemail.getText().toString();
+                        String submiteemail=reserveemail.getText().toString();
                         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
                         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-                        Matcher matcher = pattern.matcher(submitemail);
+                        Matcher matcher = pattern.matcher(submiteemail);
                         if (matcher.matches()==false){
                             Toast.makeText(getContext(),"InValid Email Format",Toast.LENGTH_SHORT).show();
                             legal=false;
@@ -132,6 +133,15 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
                         if (legal==true){
                             Toast.makeText(getContext(),"Reservation Booked",Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences= getActivity().getSharedPreferences("Reserve",0);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            String value=name+","+submitedate+","+submitetime+","+submiteemail;
+                            String key=name;
+                            editor.putString(key,value);
+                            editor.apply();
+
+
+
                         }
                         dialog.dismiss();
                     }

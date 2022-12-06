@@ -5,19 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReserveActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:background="@color/red"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/reservereturn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_arrow_back_24"
+                android:textSize="16dp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:text="Yelp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginLeft="40dp"
+
+                />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="left"
 
-        android:layout_marginLeft="60dp"
-        android:gravity="center"
-        android:text="This is reservation page"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        </RelativeLayout>
 
-        />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reserverecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="0dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/search_line" />
+
+
+    <!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_gravity="left"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginLeft="60dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="This is reservation page"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20dp"-->
+
+<!--        />-->
 
 </RelativeLayout>
