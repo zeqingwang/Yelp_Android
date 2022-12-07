@@ -65,12 +65,17 @@
         android:id="@+id/detailtab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="55dp"
+        app:tabSelectedTextColor="@color/red"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorColor="@color/red">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Business Detail" />
+            android:text="Business Detail"
+
+           />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

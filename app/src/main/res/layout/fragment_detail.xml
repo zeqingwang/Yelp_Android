@@ -112,7 +112,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="275dp"
         android:layout_marginTop="230dp"
-        android:text="Buiness Link"
+        android:text="@string/link"
+        android:textColor="@color/teal_200"
         android:textSize="15dp"
         />
 
@@ -139,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="-40dp"
 
         />
 

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
     AutoCompleteTextView autoText;
     ArrayList<String> list;
     ArrayAdapter<String> arrayAdapter;
+    TextView nosearch;
 
 
 
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        nosearch=findViewById(R.id.nosearch);
+        findViewById(R.id.nosearch).setVisibility(View.INVISIBLE);
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){
             actionBar.hide();
@@ -194,10 +197,14 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
         clearbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                keywordinput.setText("");
+                autoText.setText("");
                 distanceinput.setText("");
                 locationinput.setText("");
                 categoryspinner.setAdapter(adapter1);
+                findViewById(R.id.nosearch).setVisibility(View.INVISIBLE);
+                findViewById(R.id.searchrecycler).setVisibility(View.INVISIBLE);
+
+
             }
         });
 
@@ -242,6 +249,15 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.OnI
             public void onResponse(JSONObject response) {
                 try{
                     JSONArray business=response.getJSONArray("businesses");
+                    int businesslength= business.length();
+                    TextView nosearch=findViewById(R.id.nosearch);
+                    if(businesslength==0){
+                        nosearch.setVisibility(View.VISIBLE);
+                        findViewById(R.id.searchrecycler).setVisibility(View.INVISIBLE);
+                    }else{
+                        nosearch.setVisibility(View.INVISIBLE);
+                        findViewById(R.id.searchrecycler).setVisibility(View.VISIBLE);
+                    }
                     Log.i("result",business.getJSONObject(0).toString());
                     recyclerView=findViewById(R.id.searchrecycler);
                     businessList=new ArrayList<>();

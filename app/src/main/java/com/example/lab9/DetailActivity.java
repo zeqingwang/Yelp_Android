@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.content.Intent;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lab9.databinding.ActivityDetailBinding;
 import com.example.lab9.databinding.FragmentDetailBinding;
 import com.example.lab9.databinding.FragmentImage1Binding;
 import com.example.lab9.databinding.FragmentImage2Binding;
@@ -128,6 +130,28 @@ public class DetailActivity extends AppCompatActivity {
                     TextView detailname=findViewById(R.id.detailname);
 
                     detailname.setText(name);
+                    String link=response.getString("url");
+                    String  facebookurl = "https://www.facebook.com/sharer/sharer.php?u=" + link;
+                    String  twitterurl = "https://twitter.com/intent/tweet?text=Check out "  +name+" on Yelp. " +link;
+                    Button twitter=findViewById(R.id.twitter);
+                    Button facebook=findViewById(R.id.facebook);
+
+                    twitter.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(twitterurl));
+                            startActivity(intent);
+                        }
+                    });
+                    facebook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(facebookurl));
+                            startActivity(i);
+                        }
+                    });
 
                 }catch (JSONException e){
                     e.printStackTrace();

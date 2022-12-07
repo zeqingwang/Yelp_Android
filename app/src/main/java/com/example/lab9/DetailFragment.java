@@ -2,8 +2,10 @@ package com.example.lab9;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lab9.databinding.ActivityDetailBinding;
 import com.example.lab9.databinding.FragmentDetailBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -46,13 +49,14 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
     private ViewPager imageviewpager;
     private ImagePagerAdapter imagePagerAdapter;
     private FragmentDetailBinding binding;
+    private ActivityDetailBinding activityDetailBinding;
     private String id;
     RequestQueue detailrequestqueue;
     String name,address,price,number,category,link,img1url,img2url,img3url;
     Boolean status;
     Double latitude,longitude;
     private TextInputEditText reserveemail,reservedate,reservetime;
-    private Button cancel, submit;
+    private Button cancel, submit,twitter,facebook;
     TextView reservename;
     public DetailFragment(String id){
         this.id=id;
@@ -65,6 +69,9 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
 
         binding=FragmentDetailBinding.inflate(getLayoutInflater());
+
+//        twitter=activityDetailBinding.twitter;
+//        facebook=activityDetailBinding.facebook;
         String detail_url="https://wzqlab8backend.wl.r.appspot.com/detail?";
         detail_url+="id="+id;
         detail(detail_url);
@@ -194,6 +201,13 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 //                    Log.i("result",business.getJSONObject(0).toString());
                     JSONObject detail=response;
                     name=response.getString("name");
+                    link=response.getString("url");
+                    String  facebookurl = "https://www.facebook.com/sharer/sharer.php?u=" + link;
+                    String  twitterurl = "https://twitter.com/intent/tweet?text=Share"  +name+" on Yelp. " +link;
+                    Log.i("twitter",twitterurl);
+                    Log.i("facebook",facebookurl);
+
+
 
 
 
@@ -239,7 +253,22 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
                     }
                     binding.businesscategory.setText(category);
 //                    TextView businesslink=findViewById(R.id.businesslink);
-                    link=response.getString("url");
+
+
+
+                    binding.businesslink.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(link));
+                            startActivity(i);
+                        }
+                    });
+
+
+
+
+
 
                     img1url=response.getJSONArray("photos").getString(0);
                     img2url=response.getJSONArray("photos").getString(1);
@@ -278,6 +307,8 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
         DatePickerDialog datePickerDialog=new DatePickerDialog(getContext(),this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),Calendar.DAY_OF_MONTH);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
     }
     public void displayTimepicker(){
         Calendar calendar= Calendar.getInstance();
@@ -290,17 +321,13 @@ public class DetailFragment extends Fragment implements DatePickerDialog.OnDateS
 
             }
         },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false);
-
-
         timePickerDialog.show();
+        timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+        timePickerDialog.getButton(TimePickerDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
     }
 
 
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//
-//
-//    }
+
 
 
 

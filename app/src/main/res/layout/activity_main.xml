@@ -147,12 +147,23 @@
         android:text="Reseults"
         android:textColor="@color/black"
         android:textSize="30dp"/>
+    <TextView
+        android:id="@+id/nosearch"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="495dp"
+        android:gravity="center"
+        android:text="No Results Found."
+        android:textColor="@color/red"
+        android:textSize="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="535dp"
         android:scrollbars="vertical"
         tools:listitem="@layout/search_line"
 

@@ -30,6 +30,7 @@ public class ReserveActivity extends AppCompatActivity {
     List<Reserve> reserveList;
     ReserveAdapter reserveAdapter;
     private RelativeLayout reservelayout;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +48,15 @@ public class ReserveActivity extends AppCompatActivity {
             }
         });
         reservelayout=findViewById(R.id.reservelayout);
-        SharedPreferences sharedPreferences= getSharedPreferences("Reserve",0);
+        sharedPreferences= getSharedPreferences("Reserve",0);
+
         Map<String, ?> allEntries = sharedPreferences.getAll();
         int length=allEntries.size();
+        if(length==0){
+            findViewById(R.id.nobook).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.nobook).setVisibility(View.INVISIBLE);
+        }
 
         reserveView=findViewById(R.id.reserverecycler);
         reserveList=new ArrayList<>();
@@ -71,13 +78,18 @@ public class ReserveActivity extends AppCompatActivity {
         reserveView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         reserveAdapter=new ReserveAdapter(getApplicationContext(),reserveList);
         reserveView.setAdapter(reserveAdapter);
-        enableSwipeToDeleteAndUndo();
-
+        swipeToDelete();
+//        sharedPreferences= getSharedPreferences("Reserve",0);
+//        allEntries = sharedPreferences.getAll();
+//        length=allEntries.size();
+//        if(length==0){
+//            findViewById(R.id.nobook).setVisibility(View.VISIBLE);
+//        }
 //        reserveAdapter.setOnItemClickListener(getActivity());
 
 
     }
-    private void enableSwipeToDeleteAndUndo() {
+    private void swipeToDelete() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
@@ -92,6 +104,10 @@ public class ReserveActivity extends AppCompatActivity {
                 reserveView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 reserveAdapter=new ReserveAdapter(getApplicationContext(),reserveList);
                 reserveView.setAdapter(reserveAdapter);
+                if(reserveList.size()==0){
+                    findViewById(R.id.nobook).setVisibility(View.VISIBLE);
+
+                }
                 editor.remove(removedKey).commit();
                 Snackbar snackbar = Snackbar.make(reservelayout, "Removing Exiting Reservation.", Snackbar.LENGTH_LONG);
                 Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
@@ -107,5 +123,11 @@ public class ReserveActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(reserveView);
+        SharedPreferences sharedPreferences= getSharedPreferences("Reserve",0);
+        Map<String, ?> allEntries = sharedPreferences.getAll();
+        int length=allEntries.size();
+        if(length==0){
+            findViewById(R.id.nobook).setVisibility(View.VISIBLE);
+        }
     }
 }
